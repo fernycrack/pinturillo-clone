@@ -1,0 +1,671 @@
+/* ==========================================================================
+   PINTURILLO CLONE · Estilos complementarios a Tailwind CSS
+   --------------------------------------------------------------------------
+   Tailwind se encarga de la maquetación (grid, flex, espaciados). Aquí
+   definimos el "look" del juego: tarjetas con borde grueso, botones,
+   chat, lienzo, podio, avisos y animaciones.
+   ========================================================================== */
+
+:root {
+  --tinta: #0f172a;
+  --papel: #fffbeb;
+  --primario: #6366f1;
+  --primario-oscuro: #4f46e5;
+  --acento: #f472b6;
+  --amarillo: #fde047;
+  --verde: #10b981;
+  --rojo: #ef4444;
+}
+
+/* Garantiza que .hidden gane siempre sobre cualquier display definido aquí */
+.hidden {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Fredoka', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--papel);
+  /* Fondo con puntitos tipo cuaderno */
+  background-image: radial-gradient(#fcd34d55 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+/* ---------- Tipografía y títulos ---------- */
+.titulo-juego {
+  font-family: 'Fredoka', ui-rounded, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--tinta);
+  text-shadow: 3px 3px 0 var(--amarillo);
+  text-decoration: none;
+}
+
+.titulo-seccion {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--tinta);
+}
+
+.etiqueta {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  position: relative; /* contexto de posición del velo sobre el lienzo (no depende de Tailwind) */
+  background: #fff;
+  border: 3px solid var(--tinta);
+  border-radius: 1rem;
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+/* ---------- Campos de formulario ---------- */
+.campo {
+  width: 100%;
+  border: 2px solid var(--tinta);
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.55rem 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.campo:focus {
+  border-color: var(--primario);
+  box-shadow: 0 0 0 3px #6366f144;
+}
+
+.campo-codigo {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+}
+
+.campo-codigo::placeholder {
+  letter-spacing: normal;
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 2px solid var(--tinta);
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--tinta);
+  transition: transform 0.08s, box-shadow 0.08s, background-color 0.15s;
+  user-select: none;
+}
+
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--tinta);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-chico {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.btn-primario {
+  background: var(--primario);
+  color: #fff;
+}
+
+.btn-primario:hover {
+  background: var(--primario-oscuro);
+}
+
+.btn-secundario {
+  background: #fff;
+  color: var(--tinta);
+}
+
+.btn-secundario:hover {
+  background: #f1f5f9;
+}
+
+.btn-peligro {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-peligro:hover {
+  background: #fecaca;
+}
+
+/* Botones grandes del lobby */
+.btn-modo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem;
+  background: #fff;
+  border: 3px solid var(--tinta);
+  border-radius: 1rem;
+  box-shadow: 4px 4px 0 var(--tinta);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
+}
+
+.btn-modo:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--tinta);
+  background: #eef2ff;
+}
+
+.btn-modo.activo {
+  background: var(--amarillo);
+}
+
+/* ---------- Mensajes ---------- */
+.mensaje-error {
+  margin-top: 1rem;
+  border: 2px solid #fca5a5;
+  border-radius: 0.75rem;
+  background: #fef2f2;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  color: #991b1b;
+}
+
+/* ---------- Indicador de conexión ---------- */
+.pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pill-conectado {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.pill-desconectado {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ---------- Encabezado de la sala ---------- */
+.codigo-sala {
+  border: 2px dashed var(--tinta);
+  border-radius: 0.6rem;
+  background: var(--amarillo);
+  padding: 0.1rem 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.codigo-sala:hover {
+  background: #fde68a;
+}
+
+.reloj {
+  border: 2px solid var(--tinta);
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.15rem 0.7rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.reloj-urgente {
+  background: #fee2e2;
+  color: #b91c1c;
+  animation: latido 0.8s ease-in-out infinite;
+}
+
+.barra-tiempo {
+  height: 100%;
+  background: var(--verde);
+  transition: width 0.25s linear, background-color 0.4s;
+}
+
+.barra-tiempo.medio {
+  background: #f59e0b;
+}
+
+.barra-tiempo.poco {
+  background: var(--rojo);
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+/* ---------- Jugadores ---------- */
+.fila-jugador {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.35rem 0.5rem;
+  background: #fff;
+}
+
+.fila-yo {
+  border-color: var(--primario);
+  background: #eef2ff;
+}
+
+.fila-offline {
+  opacity: 0.5;
+}
+
+.fila-dibujando {
+  border-color: var(--acento);
+  background: #fdf2f8;
+}
+
+.fila-acerto {
+  border-color: var(--verde);
+  background: #ecfdf5;
+}
+
+.posicion {
+  width: 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 0 #0003;
+}
+
+.puntos {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Panel de administración ---------- */
+.admin-fila {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.6rem;
+  background: #f8fafc;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.9rem;
+}
+
+.admin-fila input[type='checkbox'] {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  accent-color: var(--primario);
+  cursor: pointer;
+}
+
+.admin-orden {
+  flex: none;
+  min-width: 1.6rem;
+  border-radius: 999px;
+  background: #fce7f3;
+  padding: 0 0.35rem;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #9d174d;
+}
+
+.icono-boton {
+  flex: none;
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.35rem;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.icono-boton:hover {
+  background: #e2e8f0;
+}
+
+/* ---------- Palabra / banner ---------- */
+.banner {
+  border: 3px solid var(--tinta);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--tinta);
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.banner-palabra {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.banner-palabra.mascara {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  letter-spacing: 0.1em;
+}
+
+.banner-palabra.correcto {
+  color: #047857;
+}
+
+/* ---------- Lienzo ---------- */
+.lienzo {
+  display: block;
+  width: 100%; /* el lienzo se escala por CSS; su resolución interna sigue siendo 800x600 */
+  height: auto;
+  background: #fff;
+  aspect-ratio: 4 / 3;
+  touch-action: none; /* evita que el dedo haga scroll mientras se dibuja */
+  cursor: default;
+}
+
+.lienzo-dibujable {
+  cursor: crosshair;
+}
+
+.velo {
+  position: absolute;
+  inset: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: rgba(255, 251, 235, 0.92);
+  padding: 1rem;
+}
+
+/* ---------- Herramientas de dibujo ---------- */
+.btn-herramienta {
+  border: 2px solid var(--tinta);
+  border-radius: 0.65rem;
+  background: #fff;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-herramienta:hover {
+  background: #f1f5f9;
+}
+
+.herramienta-activa {
+  background: var(--amarillo);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.muestra-color {
+  width: 1.65rem;
+  height: 1.65rem;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.muestra-color:hover {
+  transform: scale(1.15);
+}
+
+.muestra-color.seleccionada {
+  outline: 3px solid var(--primario);
+  outline-offset: 1px;
+  transform: scale(1.15);
+}
+
+.muestra-personalizada {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.muestra-personalizada input {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type='range'] {
+  accent-color: var(--primario);
+}
+
+/* ---------- Chat ---------- */
+.chat-mensajes {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.msg {
+  border-radius: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.msg-normal strong {
+  color: var(--primario-oscuro);
+}
+
+.msg-sistema {
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.msg-acierto {
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.msg-privado {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.msg-casi {
+  background: #fef3c7;
+  color: #92400e;
+  font-weight: 600;
+}
+
+/* ---------- Overlays (modales) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 1rem;
+  animation: aparecer 0.25s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ganancia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.7rem;
+  background: #f0fdf4;
+  padding: 0.35rem 0.7rem;
+  font-weight: 600;
+}
+
+.ganancia.dibujante {
+  background: #fdf2f8;
+}
+
+/* ---------- Podio ---------- */
+.podio {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 12rem;
+}
+
+.podio-columna {
+  display: flex;
+  flex: 1;
+  max-width: 9rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.podio-medalla {
+  font-size: 2.2rem;
+  animation: saltito 1.4s ease-in-out infinite;
+}
+
+.podio-nombre {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.podio-puntos {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.podio-bloque {
+  width: 100%;
+  margin-top: 0.4rem;
+  border: 3px solid var(--tinta);
+  border-bottom: 0;
+  border-radius: 0.75rem 0.75rem 0 0;
+  transform-origin: bottom;
+  animation: subir 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.podio-1 { height: 8.5rem; background: #fde047; animation-delay: 0.5s; }
+.podio-2 { height: 6rem; background: #e2e8f0; animation-delay: 0.25s; }
+.podio-3 { height: 4.25rem; background: #fdba74; animation-delay: 0s; }
+
+@keyframes subir {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes saltito {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.fila-tabla-yo {
+  background: #eef2ff;
+  font-weight: 700;
+}
+
+/* ---------- Aviso emergente (toast) ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  z-index: 60;
+  max-width: calc(100vw - 2rem);
+  transform: translate(-50%, 150%);
+  border: 2px solid var(--tinta);
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 3px 3px 0 var(--tinta);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.toast-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.toast-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.toast-ok {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* ---------- Pequeños ajustes responsivos ---------- */
+@media (max-width: 640px) {
+  .banner-palabra {
+    font-size: 1.5rem;
+  }
+  .podio-medalla {
+    font-size: 1.7rem;
+  }
+}

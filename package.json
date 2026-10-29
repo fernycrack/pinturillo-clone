@@ -1,0 +1,25 @@
+{
+  "name": "pinturillo-clone",
+  "version": "1.0.0",
+  "description": "Clon de Pinturillo 2: juego multijugador de dibujar y adivinar en tiempo real con Node.js, Express y Socket.io",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "pinturillo",
+    "socket.io",
+    "express",
+    "canvas",
+    "multijugador"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

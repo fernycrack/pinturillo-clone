@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinturillo Clone · Dibuja y adivina</title>
+
+  <!-- Tailwind CSS (CDN: ideal para un proyecto universitario, sin paso de compilación) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fuente divertida para los títulos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos complementarios -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- data-pagina le indica a client.js qué vista debe inicializar -->
+<body data-pagina="lobby" class="min-h-screen text-slate-800">
+
+  <main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+
+    <!-- Encabezado -->
+    <header class="text-center">
+      <h1 class="titulo-juego text-5xl sm:text-7xl">🎨 Pinturillo</h1>
+      <p class="mt-3 text-lg text-slate-600">
+        Dibuja, adivina y compite con tus amigos en tiempo real.
+      </p>
+      <p class="mt-2 text-xs">
+        <span id="estadoConexion" class="pill pill-desconectado">● Conectando…</span>
+      </p>
+    </header>
+
+    <!-- Selección de modo -->
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <button id="btnModoCrear" type="button" class="btn-modo">
+        <span class="text-4xl">🖌️</span>
+        <span class="text-xl font-semibold">Crear sala</span>
+        <span class="text-sm text-slate-500">Serás el administrador de la partida</span>
+      </button>
+      <button id="btnModoUnir" type="button" class="btn-modo">
+        <span class="text-4xl">🚪</span>
+        <span class="text-xl font-semibold">Unirse a sala</span>
+        <span class="text-sm text-slate-500">Entra con el código que te compartieron</span>
+      </button>
+    </div>
+
+    <!-- Formularios -->
+    <section class="tarjeta mt-6 p-5 sm:p-6">
+      <p id="textoElige" class="text-center text-slate-500">
+        Elige una opción para comenzar 👆
+      </p>
+
+      <!-- Crear sala -->
+      <form id="formCrear" class="hidden space-y-4" autocomplete="off">
+        <h2 class="titulo-seccion">Crear una sala nueva</h2>
+        <div>
+          <label for="nombreCrear" class="etiqueta">Tu nombre de usuario</label>
+          <input id="nombreCrear" type="text" maxlength="20" required class="campo" placeholder="Ej. Fernando">
+        </div>
+        <div>
+          <label for="codigoCrear" class="etiqueta">
+            Código de sala <span class="font-normal text-slate-400">(opcional, 4 a 6 caracteres)</span>
+          </label>
+          <input id="codigoCrear" type="text" maxlength="6" class="campo campo-codigo" placeholder="Déjalo vacío para generar uno">
+        </div>
+        <button id="btnEnviarCrear" type="submit" class="btn btn-primario w-full">Crear sala y entrar</button>
+      </form>
+
+      <!-- Unirse a sala -->
+      <form id="formUnir" class="hidden space-y-4" autocomplete="off">
+        <h2 class="titulo-seccion">Unirse a una sala</h2>
+        <div>
+          <label for="nombreUnir" class="etiqueta">Tu nombre de usuario</label>
+          <input id="nombreUnir" type="text" maxlength="20" required class="campo" placeholder="Ej. María">
+        </div>
+        <div>
+          <label for="codigoUnir" class="etiqueta">Código de sala (4 a 6 caracteres)</label>
+          <input id="codigoUnir" type="text" maxlength="6" minlength="4" required class="campo campo-codigo" placeholder="ABCDE">
+        </div>
+        <button id="btnEnviarUnir" type="submit" class="btn btn-primario w-full">Unirme a la sala</button>
+      </form>
+
+      <!-- Mensajes de error -->
+      <p id="mensajeLobby" class="mensaje-error hidden" role="alert"></p>
+    </section>
+
+    <!-- Cómo se juega -->
+    <section class="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-3">
+      <div class="rounded-2xl bg-white/70 p-4">
+        <p class="font-semibold text-slate-800">1 · El admin prepara</p>
+        <p class="mt-1">Escribe la lista de palabras secretas y elige quiénes dibujarán.</p>
+      </div>
+      <div class="rounded-2xl bg-white/70 p-4">
+        <p class="font-semibold text-slate-800">2 · Se dibuja</p>
+        <p class="mt-1">El dibujante tiene hasta 190 segundos para representar la palabra.</p>
+      </div>
+      <div class="rounded-2xl bg-white/70 p-4">
+        <p class="font-semibold text-slate-800">3 · Se adivina</p>
+        <p class="mt-1">Escribe en el chat. ¡Mientras más rápido aciertes, más puntos ganas!</p>
+      </div>
+    </section>
+
+    <footer class="mt-10 text-center text-xs text-slate-400">
+      Proyecto universitario · Node.js + Express + Socket.io + Canvas
+    </footer>
+  </main>
+
+  <!-- Aviso emergente -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Socket.io lo sirve el propio servidor -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/client.js"></script>
+</body>
+</html>
