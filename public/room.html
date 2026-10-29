@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sala · Pinturillo Clone</title>
+  <title>Sala · Dibuja con Maseca</title>
 
   <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,12 +22,12 @@
        =================================================================== -->
   <header class="sticky top-0 z-30 border-b-4 border-slate-900 bg-white">
     <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
-      <a href="index.html" class="titulo-juego text-2xl" title="Volver al inicio">🎨 Pinturillo</a>
+      <a href="index.html" class="titulo-juego text-2xl" title="Volver al inicio">DIBUJA CON MASECA</a>
 
       <div class="flex items-center gap-2">
         <span class="text-xs uppercase tracking-wider text-slate-500">Sala</span>
         <button id="btnCopiar" type="button" class="codigo-sala" title="Copiar enlace de invitación">
-          <span id="codigoSala">----</span> 📋
+          <span id="codigoSala">----</span> 
         </button>
       </div>
 
@@ -35,7 +35,7 @@
 
       <div class="ml-auto flex items-center gap-3">
         <div id="reloj" class="reloj" title="Tiempo restante del turno">
-          ⏱️ <span id="contadorTiempo">--:--</span>
+           <span id="contadorTiempo">--:--</span>
         </div>
         <span id="estadoConexion" class="pill pill-desconectado">● Conectando…</span>
         <button id="btnSalir" type="button" class="btn btn-secundario btn-chico">Salir</button>
@@ -58,7 +58,7 @@
       <!-- Tabla de puntajes en tiempo real -->
       <section class="tarjeta p-3">
         <div class="flex items-center justify-between">
-          <h2 class="titulo-seccion">🏆 Jugadores</h2>
+          <h2 class="titulo-seccion"> Jugadores</h2>
           <span id="contadorJugadores" class="text-xs text-slate-500">0</span>
         </div>
         <ol id="listaJugadores" class="mt-2 space-y-1.5"></ol>
@@ -66,13 +66,13 @@
 
       <!-- Panel de control EXCLUSIVO del administrador -->
       <section id="panelAdmin" class="tarjeta hidden p-3">
-        <h2 class="titulo-seccion">👑 Panel del administrador</h2>
+        <h2 class="titulo-seccion">Panel del administrador</h2>
 
         <!-- Gestión de jugadores -->
         <div class="mt-3">
           <p class="etiqueta">Jugadores en la sala</p>
           <p class="mb-1 text-xs text-slate-500">
-            Marca ✏️ a quienes dibujarán (el número indica el orden de turnos). Usa el lápiz para renombrar.
+            Marca a quienes dibujarán (el número indica el orden de turnos). Usa el lápiz para renombrar.
           </p>
           <div id="adminJugadores" class="space-y-1"></div>
         </div>
@@ -95,10 +95,10 @@
 
         <!-- Controles de partida -->
         <div class="mt-4 space-y-2">
-          <button id="btnIniciar" type="button" class="btn btn-primario w-full">▶ Iniciar partida</button>
-          <button id="btnSaltar" type="button" class="btn btn-secundario hidden w-full">⏭ Saltar turno</button>
-          <button id="btnTerminar" type="button" class="btn btn-peligro hidden w-full">⏹ Terminar partida</button>
-          <button id="btnNueva" type="button" class="btn btn-primario hidden w-full">🔄 Nueva partida</button>
+          <button id="btnIniciar" type="button" class="btn btn-primario w-full"> Iniciar partida</button>
+          <button id="btnSaltar" type="button" class="btn btn-secundario hidden w-full"> Saltar turno</button>
+          <button id="btnTerminar" type="button" class="btn btn-peligro hidden w-full"> Terminar partida</button>
+          <button id="btnNueva" type="button" class="btn btn-primario hidden w-full"> Nueva partida</button>
         </div>
         <p id="adminMensaje" class="mensaje-error mt-2 hidden" role="alert"></p>
 
@@ -125,7 +125,7 @@
         <!-- Velo con mensajes sobre el lienzo -->
         <div id="velo" class="velo">
           <div class="text-center">
-            <p id="veloTitulo" class="titulo-juego text-3xl">🎨 Sala de espera</p>
+            <p id="veloTitulo" class="titulo-juego text-3xl"> Sala de espera</p>
             <p id="veloTexto" class="mt-2 max-w-sm text-slate-600">Esperando a que el administrador inicie la partida…</p>
           </div>
         </div>
@@ -134,16 +134,16 @@
       <!-- Herramientas (solo visibles para el dibujante) -->
       <div id="herramientas" class="tarjeta hidden flex-wrap items-center gap-x-5 gap-y-3 p-3">
         <div class="flex items-center gap-2">
-          <button id="btnLapiz" type="button" class="btn-herramienta herramienta-activa" title="Lápiz">✏️ Lápiz</button>
-          <button id="btnGoma" type="button" class="btn-herramienta" title="Borrador">🧽 Goma</button>
-          <button id="btnLimpiar" type="button" class="btn-herramienta" title="Limpiar todo el lienzo">🗑️ Limpiar</button>
+          <button id="btnLapiz" type="button" class="btn-herramienta herramienta-activa" title="Lápiz"> Lápiz</button>
+          <button id="btnGoma" type="button" class="btn-herramienta" title="Borrador"> Goma</button>
+          <button id="btnLimpiar" type="button" class="btn-herramienta" title="Limpiar todo el lienzo"> Limpiar</button>
         </div>
 
         <div class="flex items-center gap-2">
           <div id="paletaColores" class="flex flex-wrap gap-1.5"></div>
           <label class="muestra-personalizada" title="Elegir otro color">
             <input id="colorPersonalizado" type="color" value="#000000">
-            <span>🎨</span>
+            <span></span>
           </label>
         </div>
 
@@ -158,7 +158,7 @@
     <!-- ---------------- Columna derecha: chat de adivinanzas ---------------- -->
     <aside class="order-3">
       <section class="tarjeta flex h-[420px] flex-col p-3 lg:h-[calc(100vh-7.5rem)]">
-        <h2 class="titulo-seccion">💬 Chat y adivinanzas</h2>
+        <h2 class="titulo-seccion"> Chat y adivinanzas</h2>
         <div id="chatMensajes" class="chat-mensajes mt-2 flex-1 space-y-1 overflow-y-auto"></div>
         <form id="formChat" class="mt-2 flex gap-2" autocomplete="off">
           <input id="inputChat" type="text" maxlength="100" class="campo" placeholder="Escribe tu respuesta…">
@@ -188,7 +188,7 @@
        =================================================================== -->
   <div id="overlayFinal" class="overlay hidden">
     <div class="tarjeta max-h-[92vh] w-full max-w-2xl overflow-y-auto p-6">
-      <h2 class="titulo-juego text-center text-4xl">🏁 ¡Fin de la partida!</h2>
+      <h2 class="titulo-juego text-center text-4xl">¡Fin de la partida!</h2>
       <p class="mt-1 text-center text-slate-500">Tabla de posiciones final</p>
 
       <!-- Podio -->
@@ -209,7 +209,7 @@
       </div>
 
       <div class="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
-        <button id="btnNuevaFinal" type="button" class="btn btn-primario hidden">🔄 Jugar otra vez</button>
+        <button id="btnNuevaFinal" type="button" class="btn btn-primario hidden"> Jugar otra vez</button>
         <p id="textoEsperaFinal" class="self-center text-sm text-slate-500 hidden">
           Esperando a que el administrador abra una nueva partida…
         </p>
